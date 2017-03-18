@@ -4,7 +4,10 @@ MAINTAINER Stefan Reuter <docker@reucon.com>
 ENV DEBIAN_FRONTEND noninteractive
 ENV VERSION 5.4.11
 
+ADD https://github.com/Yelp/dumb-init/releases/download/v1.2.0/dumb-init_1.2.0_amd64 /usr/local/bin/dumb-init
+
 RUN set -x \
+    && chmod +x /usr/local/bin/dumb-init \
     && mkdir -p /var/log/supervisor /usr/lib/unifi/data \
     && touch /usr/lib/unifi/data/.unifidatadir \
     && echo deb http://www.ubnt.com/downloads/unifi/debian unifi5 ubiquiti > /etc/apt/sources.list.d/100-unifi.list \
@@ -16,7 +19,6 @@ RUN set -x \
        mongodb-server \
        unifi
 
-ADD shared/dumb-init /usr/local/bin/
 VOLUME /usr/lib/unifi/data
 
 # unifi.http.port=8080 (port for UAP to inform controller)
