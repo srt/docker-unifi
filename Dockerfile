@@ -3,8 +3,9 @@ MAINTAINER Stefan Reuter <docker@reucon.com>
 
 ENV DEBIAN_FRONTEND noninteractive
 ENV VERSION 5.4.11
+ENV DUMB_INIT_VERSION 1.2.0
 
-ADD https://github.com/Yelp/dumb-init/releases/download/v1.2.0/dumb-init_1.2.0_amd64 /usr/local/bin/dumb-init
+ADD https://github.com/Yelp/dumb-init/releases/download/v${DUMB_INIT_VERSION}/dumb-init_${DUMB_INIT_VERSION}_amd64 /usr/local/bin/dumb-init
 
 RUN set -x \
     && chmod +x /usr/local/bin/dumb-init \
