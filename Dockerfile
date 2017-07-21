@@ -12,6 +12,9 @@ RUN set -x \
     && chmod +x /usr/local/bin/dumb-init \
     && mkdir -p /var/log/supervisor /usr/lib/unifi/data \
     && touch /usr/lib/unifi/data/.unifidatadir \
+    && apt-get update -q -y \
+    && apt-get install -q -y \
+       gnupg2 \
     && echo deb http://www.ubnt.com/downloads/unifi/debian unifi5 ubiquiti > /etc/apt/sources.list.d/100-unifi.list \
     && apt-key adv --keyserver keyserver.ubuntu.com --recv C0A52C50 \
     && apt-key adv --keyserver keyserver.ubuntu.com --recv 7F0CEB10 \
