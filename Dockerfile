@@ -17,7 +17,6 @@ RUN set -x \
        gnupg2 \
     && echo deb http://www.ubnt.com/downloads/unifi/debian unifi5 ubiquiti > /etc/apt/sources.list.d/100-unifi.list \
     && apt-key adv --keyserver keyserver.ubuntu.com --recv C0A52C50 \
-    && apt-key adv --keyserver keyserver.ubuntu.com --recv 7F0CEB10 \
     && apt-get update -q -y \
     && apt-get install -q -y \
        mongodb-server \
