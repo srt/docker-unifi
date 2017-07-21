@@ -1,9 +1,9 @@
-FROM ubuntu:16.04
+FROM debian:9
 MAINTAINER Stefan Reuter <docker@reucon.com>
 
 ENV DEBIAN_FRONTEND noninteractive
 
-# See https://www.ubnt.com/download/unifi/ for latest version
+# See https://www.ubnt.com/download/unifi/
 ENV DUMB_INIT_VERSION 1.2.0
 
 ADD https://github.com/Yelp/dumb-init/releases/download/v${DUMB_INIT_VERSION}/dumb-init_${DUMB_INIT_VERSION}_amd64 /usr/local/bin/dumb-init
@@ -13,7 +13,6 @@ RUN set -x \
     && mkdir -p /var/log/supervisor /usr/lib/unifi/data \
     && touch /usr/lib/unifi/data/.unifidatadir \
     && echo deb http://www.ubnt.com/downloads/unifi/debian unifi5 ubiquiti > /etc/apt/sources.list.d/100-unifi.list \
-    && echo deb http://downloads-distro.mongodb.org/repo/ubuntu-upstart dist 10gen > /etc/apt/sources.list.d/100-mongo.list \
     && apt-key adv --keyserver keyserver.ubuntu.com --recv C0A52C50 \
     && apt-key adv --keyserver keyserver.ubuntu.com --recv 7F0CEB10 \
     && apt-get update -q -y \
