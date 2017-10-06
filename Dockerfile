@@ -15,7 +15,7 @@ RUN set -x \
     && apt-get update -q -y \
     && apt-get install -q -y \
        gnupg2 \
-    && echo deb http://www.ubnt.com/downloads/unifi/debian stable ubiquiti > /etc/apt/sources.list.d/100-unifi.list \
+    && echo deb http://www.ubnt.com/downloads/unifi/debian testing ubiquiti > /etc/apt/sources.list.d/100-unifi.list \
     && apt-key adv --keyserver keyserver.ubuntu.com --recv 06E85760C0A52C50 \
     && apt-get update -q -y \
     && apt-get install -q -y \
