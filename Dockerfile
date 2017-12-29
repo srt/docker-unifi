@@ -4,7 +4,7 @@ MAINTAINER Stefan Reuter <docker@reucon.com>
 ENV DEBIAN_FRONTEND noninteractive
 
 # See https://www.ubnt.com/download/unifi/
-ENV DUMB_INIT_VERSION 1.2.0
+ENV DUMB_INIT_VERSION 1.2.1
 
 ADD https://github.com/Yelp/dumb-init/releases/download/v${DUMB_INIT_VERSION}/dumb-init_${DUMB_INIT_VERSION}_amd64 /usr/local/bin/dumb-init
 
