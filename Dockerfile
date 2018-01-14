@@ -3,13 +3,7 @@ MAINTAINER Stefan Reuter <docker@reucon.com>
 
 ENV DEBIAN_FRONTEND noninteractive
 
-# See https://www.ubnt.com/download/unifi/
-ENV DUMB_INIT_VERSION 1.2.1
-
-ADD https://github.com/Yelp/dumb-init/releases/download/v${DUMB_INIT_VERSION}/dumb-init_${DUMB_INIT_VERSION}_amd64 /usr/local/bin/dumb-init
-
-RUN set -x \
-    && chmod +x /usr/local/bin/dumb-init \
+RUN set -xe \
     && mkdir -p /var/log/supervisor /usr/lib/unifi/data \
     && touch /usr/lib/unifi/data/.unifidatadir \
     && apt-get update -q -y \
@@ -19,8 +13,12 @@ RUN set -x \
     && apt-key adv --keyserver keyserver.ubuntu.com --recv 06E85760C0A52C50 \
     && apt-get update -q -y \
     && apt-get install -q -y \
+       dumb-init \
        mongodb-server \
-       unifi
+       unifi \
+    && apt-get clean autoclean \
+    && apt-get autoremove --yes \
+    && rm -rf /var/lib/{apt,dpkg,cache,log}/
 
 VOLUME /usr/lib/unifi/data
 
@@ -31,5 +29,5 @@ VOLUME /usr/lib/unifi/data
 # unifi.db.port=27117 (local-bound port for DB server)
 EXPOSE 8080 8443 8880 8843 27117 443 80
 WORKDIR /usr/lib/unifi
-ENTRYPOINT ["dumb-init"]
+ENTRYPOINT ["/usr/bin/dumb-init", "--"]
 CMD ["java", "-Xmx256M", "-Djava.net.preferIPv4Stack=true", "-jar", "/usr/lib/unifi/lib/ace.jar", "start"]
