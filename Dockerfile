@@ -19,7 +19,7 @@ RUN set -xe \
        unifi \
     && apt-get clean autoclean \
     && apt-get autoremove --yes \
-    && rm -rf /var/lib/{apt,dpkg,cache,log}/
+    && rm -rf /var/lib/{apt,dpkg,cache,log}/ /usr/share/man/
 
 VOLUME /usr/lib/unifi/data
 
