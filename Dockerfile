@@ -1,9 +1,10 @@
-FROM debian:9
+FROM debian:9-slim
 MAINTAINER Stefan Reuter <docker@reucon.com>
 
 ENV DEBIAN_FRONTEND noninteractive
 
 RUN set -xe \
+    && mkdir -p /usr/share/man/man1/ \
     && mkdir -p /var/log/supervisor /usr/lib/unifi/data \
     && touch /usr/lib/unifi/data/.unifidatadir \
     && apt-get update -q -y \
